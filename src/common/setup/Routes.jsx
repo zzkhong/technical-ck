@@ -4,12 +4,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ContactPage from 'contact/ContactPage';
 import EditContactPage from 'editContact/EditContactPage';
 import { Colors } from 'common/styles';
-import { verticalScale } from 'common/styles/scales';
 import { Dimensions, Platform, StyleSheet } from 'react-native';
 
-const { height: SCREEN_HEIGHT} = Dimensions.get('window');
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
+// eslint-disable-next-line no-nested-ternary
 const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
 
 const styles = StyleSheet.create({
