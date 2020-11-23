@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "contact/*": ["./src/contact/*"],
+        "editContact/*": ["./src/editContact/*"],
+        "common/*": ["./src/common/*"],
+        "assets/*": ["./assets/*"],
+      }
+  },
+  "exclude": ["node_modules"]
+}

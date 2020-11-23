@@ -1,0 +1,14 @@
+{
+  "presets": ["module:metro-react-native-babel-preset"],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["."],
+      "alias": {
+        "common": "./src/common",
+        "contact": "./src/contact",
+        "editContact": "./src/editContact",
+        "assets": ["./assets"]
+      }
+    }]
+  ]
+}

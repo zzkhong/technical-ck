@@ -1,0 +1,8 @@
+{
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2,
+    "window.zoomLevel": 0,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true,
+    },
+}
