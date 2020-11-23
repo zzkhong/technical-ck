@@ -5,7 +5,12 @@ import ContactPage from 'contact/ContactPage';
 import EditContactPage from 'editContact/EditContactPage';
 import { Colors } from 'common/styles';
 import { verticalScale } from 'common/styles/scales';
-import { StyleSheet } from 'react-native';
+import { Dimensions, Platform, StyleSheet } from 'react-native';
+
+const { height: SCREEN_HEIGHT} = Dimensions.get('window');
+
+const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
+const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
 
 const styles = StyleSheet.create({
   headerStyle: {
@@ -13,7 +18,7 @@ const styles = StyleSheet.create({
     elevation: 0,
     borderBottomColor: Colors.grey,
     borderBottomWidth: 1,
-    height: verticalScale(50),
+    height: HEADER_HEIGHT,
   },
 });
 
