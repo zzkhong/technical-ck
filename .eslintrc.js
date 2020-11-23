@@ -23,4 +23,16 @@ module.exports = {
   ],
   rules: {
   },
+  settings: {
+    'import/resolver': {
+      'babel-module': {
+        alias: {
+          common: './src/common',
+          contact: './src/contact',
+          editContact: './src/editContact',
+          assets: './assets',
+        },
+      },
+    },
+  },
 };

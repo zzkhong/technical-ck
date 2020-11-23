@@ -7,7 +7,7 @@
         "common": "./src/common",
         "contact": "./src/contact",
         "editContact": "./src/editContact",
-        "assets": ["./assets"]
+        "assets": "./assets"
       }
     }]
   ]
