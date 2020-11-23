@@ -2,7 +2,8 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import AddIcon from 'assets/icons/AddIcon';
 import SearchIcon from 'assets/icons/SearchIcon';
 import { Colors, Spacing, Typography } from 'common/styles';
-import { verticalScale } from 'common/styles/scales';
+import { scale, verticalScale } from 'common/styles/scales';
+import { Avatar } from 'common/ui/Avatar';
 import * as React from 'react';
 import {
   FlatList,
@@ -12,7 +13,7 @@ import {
   View,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { init } from './contactActions';
+import { init, refreshContacts } from './contactActions';
 
 const styles = StyleSheet.create({
   flex: {
@@ -36,6 +37,12 @@ const styles = StyleSheet.create({
   headerBtn: {
     paddingHorizontal: Spacing.smallScaled,
   },
+  icon: {
+    marginHorizontal: Spacing.smallScaled,
+  },
+  text: {
+    ...Typography.headerBtnLabel,
+  },
 });
 
 const ContactPage = () => {
@@ -43,6 +50,7 @@ const ContactPage = () => {
   const navigation = useNavigation();
 
   const contacts = useSelector((state) => state.contact.contacts);
+  const isLoading = useSelector((state) => state.contact.isLoading);
 
   // Set Header Options
   useFocusEffect(() => {
@@ -70,12 +78,25 @@ const ContactPage = () => {
     dispatch(init());
   }, []);
 
+  const handleRowPress = React.useCallback((item) => {
+    navigation.navigate('EditContact', {
+      contact: item,
+    });
+  }, [contacts]);
+
   const renderSeparator = React.useCallback(() => (
     <View style={styles.separator} />
   ), []);
 
   const renderItem = React.useCallback((item) => (
-    <Text>{`${item.firstName}  ${item.lastName}`}</Text>
+    <TouchableOpacity onPress={() => handleRowPress(item)}>
+      <View style={[styles.flex, styles.row]}>
+        <View style={styles.icon}>
+          <Avatar size={scale(50)} />
+        </View>
+        <Text style={styles.text}>{`${item.firstName}  ${item.lastName}`}</Text>
+      </View>
+    </TouchableOpacity>
   ), [contacts]);
 
   return (
@@ -83,6 +104,8 @@ const ContactPage = () => {
       data={contacts}
       ItemSeparatorComponent={() => renderSeparator()}
       renderItem={({ item }) => renderItem(item)}
+      refreshing={isLoading}
+      onRefresh={() => dispatch(refreshContacts())}
     />
   );
 };
